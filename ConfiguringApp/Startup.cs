@@ -28,6 +28,8 @@ namespace ConfiguringApp
 
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseMiddleware<BrowserTypeMiddleware>();
+            app.UseMiddleware<ShortCircuitMiddleware>();
             app.UseMiddleware<ContentMiddleware>();
 
             app.UseEndpoints(endpoints =>

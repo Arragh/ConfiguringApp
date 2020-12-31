@@ -22,7 +22,7 @@ namespace ConfiguringApp.Infrastructure
         {
             if (httpContext.Request.Path.ToString().ToLower() == "/middleware")
             {
-                await httpContext.Response.WriteAsync("Eto kontent midlevare" + $"uptime: {uptime.Uptime}ms", Encoding.UTF8);
+                await httpContext.Response.WriteAsync("Eto kontent midlevare - " + $"uptime: {uptime.Uptime}ms", Encoding.UTF8);
             }
             else
             {
