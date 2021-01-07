@@ -21,10 +21,16 @@ namespace ConfiguringApp
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    //webBuilder.UseKestrel();
-                    //webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
-                    //webBuilder.UseIISIntegration();
-
+                    webBuilder.UseKestrel();
+                    webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+                    webBuilder.ConfigureLogging((hostingText, logging) =>
+                    {
+                        logging.AddConfiguration(hostingText.Configuration.GetSection("Logging"));
+                        logging.AddConsole();
+                        logging.AddDebug();
+                    });
+                    webBuilder.UseIISIntegration();
+                    webBuilder.UseDefaultServiceProvider((context, options) => options.ValidateScopes = context.HostingEnvironment.IsDevelopment());
                     webBuilder.UseStartup<Startup>();
                 });
     }
